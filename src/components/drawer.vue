@@ -18,6 +18,7 @@
                 <div v-if="showMore" class="listBar-cot">
                     <div
                             v-for="item in configList"
+                            :key="item.name"
                             class="drag-cot"
                             draggable="true"
                             @drag="drag(item)"
@@ -60,7 +61,7 @@
       }, false)
     },
     methods: {
-      drag: function (item) {
+      drag: function () {
         const parentRect = document.getElementById('container').getBoundingClientRect()
         let mouseInGrid = false
         if (((mouseXY.x > parentRect.left) && (mouseXY.x < parentRect.right)) && ((mouseXY.y > parentRect.top) && (mouseXY.y < parentRect.bottom))) {
