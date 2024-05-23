@@ -25,12 +25,14 @@ jobs:
       run: yarn build
 
     - name: Deploy to view Branch
+      env:
+          # GitHub Token
+          GITHUB_TOKEN: ${{ secrets.ACT_TOKEN }}
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-
-        git checkout -B view
-        git add .
-        git commit -m "Auto deploy from GitHub Action"
-        git push -f origin view
+          rm -rf .git
+          git config --global user.email "1134098699@qq.com"
+          git config --global user.name "ibas"
+          git init && git add .
+          git commit -m "build at $(date +'%Y-%m-%d %H:%M:%S')"
+          git push --force --quiet https://$GITHUB_TOKEN@github.com/SunIBAS/main.git master:views
 
