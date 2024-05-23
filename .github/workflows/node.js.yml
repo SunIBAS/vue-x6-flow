@@ -1,0 +1,38 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Project
+      run: npm run build
+
+    - name: Deploy to view Branch
+      env:
+          # GitHub Token
+          GITHUB_TOKEN: ${{ secrets.ACT_TOKEN }}
+      run: |
+          rm -rf .git
+          git config --global user.email "1134098699@qq.com"
+          git config --global user.name "ibas"
+          git init && git add .
+          git commit -m "build at $(date +'%Y-%m-%d %H:%M:%S')"
+          git push --force --quiet https://$GITHUB_TOKEN@github.com/SunIBAS/vue-x6-flow.git master:views
+
