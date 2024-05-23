@@ -34,5 +34,5 @@ jobs:
           git config --global user.name "ibas"
           git init && git add .
           git commit -m "build at $(date +'%Y-%m-%d %H:%M:%S')"
-          git push --force --quiet https://$GITHUB_TOKEN@github.com/SunIBAS/main.git master:views
+          git push --force --quiet https://$GITHUB_TOKEN@github.com/SunIBAS/vue-x6-flow.git master:views
 
