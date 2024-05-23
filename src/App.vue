@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import {Graph, Node, Path, Cell} from '@antv/x6'
+  import {Graph, Path } from '@antv/x6'
   import '@antv/x6-vue-shape'
 
   import database from './components/nodeTheme/database.vue'
@@ -437,7 +437,7 @@
             connector: 'algo-connector',
             connectionPoint: 'anchor',
             anchor: 'center',
-            validateMagnet({magnet}) {
+            validateMagnet({}) {
               // return magnet.getAttribute('port-group') !== 'top'
 
               // 限制连线配置
@@ -474,14 +474,14 @@
         })
         this.graph = graph
 
-        graph.on('edge:contextmenu', ({e, x, y, edge, view}) => {
+        graph.on('edge:contextmenu', ({e, edge}) => {
           this.showContextMenu = true
           this.$nextTick(() => {
             this.$refs.menuBar.initFn(e.offsetX, e.offsetY, {type: 'edge', item: edge})
           })
         })
 
-        graph.on('node:contextmenu', ({e, x, y, node, view}) => {
+        graph.on('node:contextmenu', ({x, y, node}) => {
           this.showContextMenu = true
 
           this.$nextTick(() => {
